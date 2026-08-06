@@ -37,9 +37,6 @@
   </div>
 
   <script>
-    // ↓↓↓ THIS is the only part you edit day to day. ↓↓↓
-    // Just add/remove/change names and vote counts here — the list
-    // below rebuilds and sorts itself automatically, highest votes first.
     const nominees = {
       "Ink": 10,s
       "Ender": 5,
@@ -49,17 +46,13 @@
       "Darq": 1,
       "EliGlitch": 1
     };
-    // ↑↑↑ stop editing here ↑↑↑
+
 
     function renderNominees() {
       const list = document.getElementById("nominees-list");
-      list.innerHTML = ""; // clear whatever's there before rebuilding
+      list.innerHTML = "";
 
-      // Turn the object into an array of [name, votes] pairs so we can sort it —
-      // plain objects don't have a guaranteed order, arrays do.
       const sorted = Object.entries(nominees).sort((a, b) => b[1] - a[1]);
-      // b[1] - a[1] compares vote counts and sorts highest → lowest.
-      // (swap to a[1] - b[1] if you ever want lowest → highest instead)
 
       for (const [name, votes] of sorted) {
         const div = document.createElement("div");
