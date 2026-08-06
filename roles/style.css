@@ -1,0 +1,128 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1 {
+  font-family: "IM Fell English", serif;
+  font-size: 48px;
+}
+
+h2 {
+  font-family: "IM Fell English", serif;
+  font-size: 28px;
+}
+
+h3 {
+  font-family: "IM Fell English", serif;
+  font-size: 40px;
+}
+
+h4 {
+  font-family: "IM Fell English", serif;
+  font-size: 32px;
+}
+
+p {
+  font-family: "IM Fell English", serif;
+  font-size: 20px;
+}
+
+body {
+    background-color: #736f77;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background-color: #c9b4b4;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  height: 120px;
+  width: auto;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.nav-buttons button {
+  padding: 12px 20px;
+  border-radius: 6px;
+  border: 1px solid #e74a4a;
+  background: rgb(238, 124, 124);
+  cursor: pointer;
+  font-size: 48px;
+  font-family: "IM Fell English", serif;
+}
+
+.nominees-section {
+  margin-top: 40px;
+  text-align: center;
+  background-color: #e6dab9;
+}
+
+.nominees-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  text-align: center;
+  background-color: #e6dab9;
+}
+
+.log-section {
+  width: 85%;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #ceba85;
+  padding: 24px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 32px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  .nav-buttons button {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .log-section,
+  .nominees-section {
+    width: 95%;
+    padding: 16px;
+  }
+}
+
+.role-title {
+  font-size: 120px;
+  font-family: "IM Fell English", serif;
+  margin-bottom: 5px;
+}
+
+.role-faction {
+  font-size: 60px;
+  font-family: "IM Fell English", serif;
+}
+
+.role-quote {
+  font-style: italic;
+  font-size: 48px;
+  margin-bottom: 25px;
+  color: #4a4a4a;
+}
