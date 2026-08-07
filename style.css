@@ -70,6 +70,11 @@ body {
   background-color: #e6dab9;
 }
 
+.at-risk {
+  font-family: "IM Fell English", serif;
+  color: #b80606;
+}
+
 .nominees-list {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
