@@ -93,6 +93,11 @@ body {
   text-align: center;
 }
 
+.discord-tag {
+  font-size: 18px;
+  color: #111111;
+}
+
 @media (max-width: 768px) {
   h1 {
     font-size: 32px;
