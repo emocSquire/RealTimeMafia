@@ -40,35 +40,36 @@
     <p>Everyone's been assigned their <a href="roles.html">ROLES</a></p>
   </div>
 
-  <script>
+<script>
+  const nominees = {
+    "Ink": 10,
+    "Ender": 5,
+    "Arch": 3,
+    "Notmyname": 2,
+    "Knight": 1,
+    "Darq": 1,
+    "EliGlitch": 1
+  };
 
-    const nominees = {
-      "Ink": 10,
-      "Ender": 5,
-      "Arch": 3,
-      "Notmyname": 2,
-      "Knight": 1,
-      "Darq": 1,
-      "EliGlitch": 1
-    };
+  function renderNominees() {
+    const list = document.getElementById("nominees-list");
+    list.innerHTML = "";
 
+    const sorted = Object.entries(nominees).sort((a, b) => b[1] - a[1]);
 
-    function renderNominees() {
-      const list = document.getElementById("nominees-list");
-      list.innerHTML = "";
-      const sorted = Object.entries(nominees).sort((a, b) => b[1] - a[1]);
-
-      for (const [name, votes] of sorted) {
-        const div = document.createElement("div");
-        div.className = "nominee";
-        div.innerHTML = `
-          <h3 class="name">${name}</h3>
-          <h4 class="votes">${votes} vote${votes === 1 ? "" : "s"}</h4>
-        `;
-        list.appendChild(div);
-      }
+    for (const [name, votes] of sorted) {
+      const div = document.createElement("div");
+      div.className = "nominee";
+      div.innerHTML = `
+        <h3 class="name ${votes >= 3 ? "at-risk" : ""}">${name}</h3>
+        <h4 class="votes">${votes} vote${votes === 1 ? "" : "s"}</h4>
+      `;
+      list.appendChild(div);
     }
+  }
 
+  renderNominees();
+</script>
     renderNominees();
   </script>
 </body>
