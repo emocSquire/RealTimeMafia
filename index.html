@@ -18,6 +18,11 @@
     </div>
   </div>
    
+  <div class="timer-section">
+    <h2 id="phase-label">Loading phase...</h2>
+    <h1 id="phase-countdown">--:--:--</h1>
+  </div>
+
   <div class="nominees-section">
     <h1>TODAY'S NOMINEES:</h1>
     <div class="nominees-list" id="nominees-list">
@@ -40,6 +45,7 @@
      <p>Ink no longer dying???</p>
      <p>bro they got Notmyname on the stand now 😭</p>
      <p>Ender gets the third vote! Finally some competition for the other guy!</p>
+     <p><a href="roles/editor.html">The editor</a> pinned CDC's message saying "helloeveryone"!</p>
      <p>You people really want Ink dead, huh...</p>
     <p>Ink is now eligible for the gallows!</p>
     <p>Everyone's been assigned their <a href="roles.html">ROLES</a></p>
@@ -47,8 +53,8 @@
 
 <script>
   const nominees = {
-    "Ink": 13,
-    "Ender": 5,
+    "Ink": 11,
+    "Ender": 7,
     "Arch": 3,
     "Notmyname": 2,
     "Knight": 1,
@@ -75,8 +81,82 @@
   }
 
   renderNominees();
-</script>
+  </script>
     renderNominees();
   </script>
+   <script>
+    // ---- Phase schedule (all times in Europe/Bratislava) ----
+    // Day:    16:00 -> 15:00 (next day)   [23 hours]
+    // Voting: 15:00 -> 15:30
+    // Night:  15:30 -> 16:00
+    const VOTE_START_MIN  = 15 * 60;       // 15:00 -> 900
+    const NIGHT_START_MIN = 15 * 60 + 30;  // 15:30 -> 930
+    const DAY_START_MIN   = 16 * 60;       // 16:00 -> 960
+
+    function getBratislavaParts() {
+      // Intl gives us the correct wall-clock time in Slovakia, including
+      // automatically adjusting for CET/CEST daylight saving.
+      const now = new Date();
+      const parts = new Intl.DateTimeFormat("en-GB", {
+        timeZone: "Europe/Bratislava",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hourCycle: "h23",
+      }).formatToParts(now);
+
+      const get = (type) => parseInt(parts.find(p => p.type === type).value, 10);
+      return {
+        hours: get("hour"),
+        minutes: get("minute"),
+        seconds: get("second"),
+      };
+    }
+
+    function updateTimer() {
+      const { hours, minutes, seconds } = getBratislavaParts();
+      const minutesSinceMidnight = hours * 60 + minutes;
+      const secondsSinceMidnight = minutesSinceMidnight * 60 + seconds;
+
+      let phase, nextTransitionSeconds;
+
+      if (minutesSinceMidnight >= DAY_START_MIN || minutesSinceMidnight < VOTE_START_MIN) {
+        // It's Day. Next transition is Voting at 15:00.
+        phase = "DAY";
+        nextTransitionSeconds = VOTE_START_MIN * 60;
+        if (minutesSinceMidnight >= DAY_START_MIN) {
+          // still "today" before midnight, target is tomorrow's 15:00
+          nextTransitionSeconds += 24 * 60 * 60;
+        }
+      } else if (minutesSinceMidnight >= VOTE_START_MIN && minutesSinceMidnight < NIGHT_START_MIN) {
+        phase = "VOTING";
+        nextTransitionSeconds = NIGHT_START_MIN * 60;
+      } else {
+        phase = "NIGHT";
+        nextTransitionSeconds = DAY_START_MIN * 60;
+      }
+
+      let remaining = nextTransitionSeconds - secondsSinceMidnight;
+      if (remaining < 0) remaining += 24 * 60 * 60; // safety wraparound
+
+      const h = String(Math.floor(remaining / 3600)).padStart(2, "0");
+      const m = String(Math.floor((remaining % 3600) / 60)).padStart(2, "0");
+      const s = String(remaining % 60).padStart(2, "0");
+
+      const labelText = {
+        DAY: "It is currently DAY",
+        VOTING: "VOTING is open",
+        NIGHT: "It is currently NIGHT",
+      }[phase];
+
+      document.getElementById("phase-label").textContent = labelText;
+      document.getElementById("phase-countdown").textContent = `${h}:${m}:${s}`;
+    }
+
+    updateTimer();
+    setInterval(updateTimer, 1000);
+  </script>
+
+
 </body>
 </html>

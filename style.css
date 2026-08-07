@@ -118,3 +118,17 @@ body {
     padding: 16px;
   }
 }
+
+.timer-section {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.timer-section h2 {
+  color: #e2b7b7;
+}
+
+.timer-section h1 {
+  color: #e2b7b7;
+  font-size: 56px;
+}
