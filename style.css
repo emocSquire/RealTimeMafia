@@ -98,6 +98,20 @@ body {
   color: #5a5959;
 }
 
+.timer-section {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.timer-section h2 {
+  color: #e2b7b7;
+}
+
+.timer-section h1 {
+  color: #e2b7b7;
+  font-size: 56px;
+}
+
 @media (max-width: 768px) {
   h1 {
     font-size: 32px;
@@ -129,24 +143,15 @@ body {
   }
 
   .nominees-list {
-    grid-temp
-  .log-section,
-  .nominees-section {
-    width: 95%;
-    padding: 16px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
   }
-}
 
-.timer-section {
-  text-align: center;
-  margin-top: 20px;
-}
+  .nominees-list h3.name {
+    font-size: 20px;
+  }
 
-.timer-section h2 {
-  color: #e2b7b7;
-}
-
-.timer-section h1 {
-  color: #e2b7b7;
-  font-size: 56px;
+  .nominees-list h4.votes {
+    font-size: 14px;
+  }
 }
