@@ -107,11 +107,29 @@ body {
     font-size: 20px;
   }
 
-  .nav-buttons button {
-    padding: 6px 12px;
-    font-size: 12px;
+  .header {
+    flex-direction: column;
+    padding: 12px;
   }
 
+  .logo {
+    height: 70px;
+    margin-bottom: 8px;
+  }
+
+  .nav-buttons button {
+    padding: 8px 14px;
+    font-size: 16px;
+  }
+
+  .log-section,
+  .nominees-section {
+    width: 95%;
+    padding: 16px;
+  }
+
+  .nominees-list {
+    grid-temp
   .log-section,
   .nominees-section {
     width: 95%;
